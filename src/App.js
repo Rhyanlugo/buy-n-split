@@ -31,21 +31,21 @@ function Button({ children, onClick }) {
 
 export default function App() {
   const [friends, setFriends] = useState(initialFriends);
-  const [showAddFriend, setshowAddFriend] = useState(false);
+  const [showAddFriend, setShowAddFriend] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   function handleShowAddFriend() {
-    setshowAddFriend((show) => !show);
+    setShowAddFriend((show) => !show);
   }
 
   function handleAddFriend(friend) {
     setFriends((friends) => [...friends, friend]);
-    setshowAddFriend(false);
+    setShowAddFriend(false);
   }
 
   function handleSelectedFriend(friend) {
     setSelectedFriend((curSelectedFriend) => (curSelectedFriend?.id === friend.id ? null : friend));
-    setshowAddFriend(false);
+    setShowAddFriend(false);
   }
 
   function handleSplitBill(value) {
@@ -73,7 +73,11 @@ export default function App() {
       </div>
 
       {selectedFriend && (
-        <FormSplitBill selectedFriend={selectedFriend} onSplitBill={handleSplitBill} />
+        <FormSplitBill
+          selectedFriend={selectedFriend}
+          onSplitBill={handleSplitBill}
+          key={selectedFriend.id}
+        />
       )}
     </div>
   );
